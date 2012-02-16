@@ -13,9 +13,14 @@ class Background
   end
 
   def generate
-    (0...x).each do |col|
-      (0...y).each do |row|
-        canvas[col,row] = random_colour
+    (0...x).to_a.keep_if {|n| n % 38 == 0 }.each do |col|
+      (0...y).to_a.keep_if {|n| n % 27 == 0}.each do |row|
+        colour = random_colour
+        (col...col+38).each do |c|
+          (row...row+27).each do |r|
+            canvas[c,r] = colour
+          end
+        end
       end
     end
     self
