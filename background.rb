@@ -1,4 +1,5 @@
 require 'chunky_png'
+require 'chunky_png/rmagick'
 
 class Background
 
@@ -23,6 +24,7 @@ class Background
         end
       end
     end
+    rmagick_process
     self
   end
 
@@ -31,6 +33,12 @@ class Background
   end
 
   private
+  
+  def rmagick_process
+    image = ChunkyPNG::RMagick.export(canvas)
+    image2 = image.radial_blur(45.0).adaptive_blur
+    @canvas = ChunkyPNG::RMagick.import(image2).to_image
+  end
 
   def random_colour
     ChunkyPNG::Color(ChunkyPNG::Color::PREDEFINED_COLORS.keys[rand(ChunkyPNG::Color::PREDEFINED_COLORS.keys.length)])
