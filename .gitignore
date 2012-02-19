@@ -16,3 +16,4 @@ coverage
 Procfile
 config/dev_nginx*.conf
 *.swp
+*.png
